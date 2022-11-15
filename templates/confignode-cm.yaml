@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.confignode.name }}-cm
+data:
+  iotdb-confignode.properties: |
+    cn_internal_address=<HOSTNAME>
+    cn_target_config_node_list={{ .Values.confignode.name }}-0:22277
+  iotdb-common.properties: |
+    config_node_consensus_protocol_class={{ .Values.confignode.configNodeConsensusProtocolClass }}
+    schema_replication_factor={{ .Values.confignode.schemaReplicationFactor }}
+    schema_region_consensus_protocol_class={{ .Values.confignode.schemaRegionConsensusProtocolClass }}
+    data_replication_factor={{ .Values.confignode.dataReplicationFactor }}
+    data_region_consensus_protocol_class={{ .Values.confignode.dataRegionConsensusProtocolClass }}
