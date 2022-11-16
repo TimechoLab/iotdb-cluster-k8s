@@ -7,7 +7,7 @@ fullnameOverride: "iotdb"
 namespace: iotdb-cluster
 
 image:
-  repository: docker.io/xingtanzjr/iotdb-cluster
+  repository: 10.61.0.70:10043/sit/iotdb-cluster
   pullPolicy: IfNotPresent
   tag: 0.1.9
 
@@ -29,7 +29,7 @@ datanode:
 
 confignode:
   name: confignode
-  nodeCount: 3
+  nodeCount: 1
   dataDir: /iotdb/data
   storageCapacity: 10Gi
   resources:
@@ -40,7 +40,7 @@ confignode:
       memory: "8Gi"
       cpu: "2000m"
   configNodeConsensusProtocolClass: org.apache.iotdb.consensus.ratis.RatisConsensus
-  schemaReplicationFactor: 3
+  schemaReplicationFactor: 1
   schemaRegionConsensusProtocolClass: org.apache.iotdb.consensus.ratis.RatisConsensus
   dataReplicationFactor: 3
   dataRegionConsensusProtocolClass: org.apache.iotdb.consensus.multileader.MultiLeaderConsensus
