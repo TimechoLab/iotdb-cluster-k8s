@@ -34,6 +34,13 @@ spec:
       - name: confignode
         image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag }}
         command: ["/bin/bash", "-c", "/iotdb/start-confignode.sh"]
+        resources:
+          requests:
+            memory: {{ .Values.confignode.resources.requests.memory }}
+            cpu: {{ .Values.confignode.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.confignode.resources.limits.memory }}
+            cpu: {{ .Values.confignode.resources.limits.cpu }}
         ports:
         - containerPort: 80
           name: web
