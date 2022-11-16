@@ -2,10 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: {{ .Values.namespace }}
-  name: jdbc-balancer
+  name: iotdb-node-port-svc
 spec:
-  type: LoadBalancer
-  ports:
-  - port: 6667
+  type: NodePort
   selector:
     app: {{ .Values.datanode.name }}
+  ports:
+  - port: 6667
+    targetPort: 6667
+    nodePort: 32667
