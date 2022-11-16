@@ -40,8 +40,8 @@ spec:
         - containerPort: 22278
           name: consensus
         volumeMounts:
-        - name: www
-          mountPath: /usr/share/nginx/html
+        - name: data
+          mountPath: {{ .Values.confignode.dataDir }}
         - name: config
           mountPath: /iotdb/conf_tmp
       volumes:
@@ -50,10 +50,10 @@ spec:
           name: {{ .Values.confignode.name }}-cm
   volumeClaimTemplates:
   - metadata:
-      name: www
+      name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: "azurefile"
       resources:
         requests:
-          storage: 10Mi
+          storage: 50Mi

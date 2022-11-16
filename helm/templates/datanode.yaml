@@ -62,4 +62,4 @@ spec:
       storageClassName: "azurefile"
       resources:
         requests:
-          storage: 10Mi
+          storage: 500Mi
