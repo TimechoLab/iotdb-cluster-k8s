@@ -4,20 +4,24 @@
 
 nameOverride: "iotdb"
 fullnameOverride: "iotdb"
+namespace: iotdb-cluster
 
 image:
   repository: docker.io/xingtanzjr/iotdb-cluster
   pullPolicy: IfNotPresent
   tag: 0.1.9
 
+storage:
+  className: azurefile
+
 datanode:
-  name: iotdb-datanode
+  name: datanode
   nodeCount: 3
   dataDir: /iotdb/data
   storageCapacity: 10Gi
 
 confignode:
-  name: iotdb-confignode
+  name: confignode
   nodeCount: 3
   dataDir: /iotdb/data
   storageCapacity: 1Gi
