@@ -12,7 +12,7 @@ image:
   tag: 0.1.9
 
 storage:
-  className: azurefile
+  className: edge-rbd
 
 datanode:
   name: datanode
