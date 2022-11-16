@@ -21,22 +21,33 @@ spec:
     matchLabels:
       app: {{ .Values.confignode.name }}
   serviceName: {{ .Values.confignode.name }}-svc
-  replicas: 1
+  replicas: {{ .Values.confignode.nodeCount }}
   template:
     metadata:
       labels:
         app: {{ .Values.confignode.name }}
     spec:
-      terminationGracePeriodSeconds: 100
+      terminationGracePeriodSeconds: 10
       containers:
       - name: confignode
-        image: registry.k8s.io/nginx-slim:0.8
+        image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag }}
+        command: ["/bin/bash", "-c", "/iotdb/start-confignode.sh"]
         ports:
         - containerPort: 80
           name: web
+        - containerPort: 22277
+          name: internal
+        - containerPort: 22278
+          name: consensus
         volumeMounts:
         - name: www
           mountPath: /usr/share/nginx/html
+        - name: config
+          mountPath: /iotdb/conf_tmp
+      volumes:
+      - name: config
+        configMap:
+          name: {{ .Values.confignode.name }}-cm
   volumeClaimTemplates:
   - metadata:
       name: www

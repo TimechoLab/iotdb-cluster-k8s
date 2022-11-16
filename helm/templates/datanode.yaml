@@ -27,23 +27,24 @@ spec:
       labels:
         app: {{ .Values.datanode.name }}
     spec:
-      terminationGracePeriodSeconds: 100
+      terminationGracePeriodSeconds: 10
       containers:
       - name: datanode
-        image: registry.k8s.io/nginx-slim:0.8
+        image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag }}
+        command: ["/bin/bash", "-c", "/iotdb/start-datanode.sh"]
         ports:
         - containerPort: 80
           name: web
         - containerPort: 6667
-          name: dn_rpc_port
+          name: rpc
         - containerPort: 9003
-          name: dn_internal_port
+          name: internal
         - containerPort: 8777
-          name: dn_mpp_data_exchange_port
+          name: mpp-exchange
         - containerPort: 50010
-          name: dn_schema_region_consensus_port
+          name: schema-cons
         - containerPort: 40010
-          name: dn_data_region_consensus_port
+          name: data-cons
         volumeMounts:
         - name: data
           mountPath: {{ .Values.datanode.dataDir }}

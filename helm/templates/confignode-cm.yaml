@@ -4,8 +4,8 @@ metadata:
   name: {{ .Values.confignode.name }}-cm
 data:
   iotdb-confignode.properties: |
-    cn_internal_address=<HOSTNAME>
-    cn_target_config_node_list={{ .Values.confignode.name }}-0:22277
+    cn_internal_address=<HOSTNAME>.{{ .Values.confignode.name }}-svc
+    cn_target_config_node_list={{ .Values.confignode.name }}-0.{{ .Values.confignode.name }}-svc:22277
   iotdb-common.properties: |
     config_node_consensus_protocol_class={{ .Values.confignode.configNodeConsensusProtocolClass }}
     schema_replication_factor={{ .Values.confignode.schemaReplicationFactor }}

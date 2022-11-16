@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Values.datanode.name }}-cm
-data:
-  iotdb-datanode.properties: |
-    dn_rpc_address=<HOSTNAME>
-    dn_internal_address=<HOSTNAME>
-    dn_target_config_node_list={{ .Values.confignode.name }}-0:22277

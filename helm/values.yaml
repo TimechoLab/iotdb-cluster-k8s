@@ -5,6 +5,11 @@
 nameOverride: "iotdb"
 fullnameOverride: "iotdb"
 
+image:
+  repository: docker.io/xingtanzjr/iotdb-cluster
+  pullPolicy: IfNotPresent
+  tag: 0.1.7
+
 datanode:
   name: iotdb-datanode
   nodeCount: 3
@@ -12,17 +17,12 @@ datanode:
 
 confignode:
   name: iotdb-confignode
+  nodeCount: 3
   configNodeConsensusProtocolClass: org.apache.iotdb.consensus.ratis.RatisConsensus
   schemaReplicationFactor: 1
   schemaRegionConsensusProtocolClass: org.apache.iotdb.consensus.simple.SimpleConsensus
   dataReplicationFactor: 1
   dataRegionConsensusProtocolClass: org.apache.iotdb.consensus.simple.SimpleConsensus
-
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
 
 imagePullSecrets: []
 
