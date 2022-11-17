@@ -52,6 +52,10 @@ spec:
           mountPath: {{ .Values.datanode.dataDir }}
         - name: config
           mountPath: /iotdb/conf_tmp
+        resources:
+          requests:
+            cpu: {{ .Values.datanode.resources.requests.cpu }}
+            memory: {{ .Values.datanode.resources.requests.memory }}
       volumes:
       - name: config
         configMap:

@@ -19,12 +19,26 @@ datanode:
   nodeCount: 3
   dataDir: /iotdb/data
   storageCapacity: 10Gi
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 500m
+    limits:
+      memory: 1Gi
+      cpu: 1000m
 
 confignode:
   name: confignode
   nodeCount: 3
   dataDir: /iotdb/data
   storageCapacity: 1Gi
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
+    limits:
+      memory: 512Mi
+      cpu: 500m
   configNodeConsensusProtocolClass: org.apache.iotdb.consensus.ratis.RatisConsensus
   schemaReplicationFactor: 3
   schemaRegionConsensusProtocolClass: org.apache.iotdb.consensus.ratis.RatisConsensus
