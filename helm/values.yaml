@@ -9,24 +9,24 @@ namespace: iotdb-cluster
 image:
   repository: docker.io/xingtanzjr/iotdb-cluster
   pullPolicy: IfNotPresent
-  tag: 0.1.9
+  tag: rel_1.0
 
 storage:
-  className: azurefile
+  className: local-storage
 
 datanode:
   name: datanode
   nodeCount: 3
   dataDir: /iotdb/data
-  storageCapacity: 10Gi
+  storageCapacity: 20Gi
 
 confignode:
   name: confignode
-  nodeCount: 3
+  nodeCount: 1
   dataDir: /iotdb/data
   storageCapacity: 1Gi
   configNodeConsensusProtocolClass: org.apache.iotdb.consensus.ratis.RatisConsensus
-  schemaReplicationFactor: 3
+  schemaReplicationFactor: 1
   schemaRegionConsensusProtocolClass: org.apache.iotdb.consensus.ratis.RatisConsensus
   dataReplicationFactor: 3
-  dataRegionConsensusProtocolClass: org.apache.iotdb.consensus.multileader.MultiLeaderConsensus
+  dataRegionConsensusProtocolClass: org.apache.iotdb.consensus.iot.IoTConsensus
